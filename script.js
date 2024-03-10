@@ -5,7 +5,6 @@
 
 //Section 2: App State Variables
 let tasks = [];
-console.log(tasks);
 
 //Section 3: Cached Element References
 const taskForm = document.getElementById("taskForm");
@@ -16,18 +15,14 @@ const taskTable = document.getElementById("taskTable");
 function handleSubmission(event) {
   event.preventDefault();
   // TODO: Get form input values;
-  const taskName = document.getElementById("taskName");
-  const taskDescription = document.getElementById("taskDescription");
-  const taskDeadline = document.getElementById("taskDeadline");
-  console.log(taskName + "" + taskDeadline);
+  const taskName = document.getElementById("taskName").value;
+  const taskDescription = document.getElementById("taskDescription").value;
+  const taskDeadline = document.getElementById("taskDeadline").value;
   // TODO: Validate input fields;
-  if (
-    document.getElementById("taskName") == "" ||
-    document.getElementById("taskDeadline") == ""
-  ) {
+  if (taskName == "" || taskDeadline == "") {
     return alert("Task name and deadline are required!");
   } else {
-    return alert(taskName + " has been added");
+    alert(taskName + " has been added");
   }
   // TODO: Update the tasks array
   tasks.push({
@@ -43,27 +38,34 @@ function render() {
   // TODO: Use array methods to create a new table row of data for each item in the array.
   taskTable.innerHTML = tasks
     .map(
-      task =>
-        `<tr>
-            <td>
-              ${task.name}
-            </td>
-            <td>
-              ${task.description}
-            </td>
-            <td>
-              ${task.deadline}
-            </td>
-            <td><button onclick="markTaskComplete(this)">Complete</button></td>
-            <td><button onclick="removeTask(this)">Remove</button></td>
-        </tr>`
+      (task) =>
+        `<tr> 
+      <td>
+      ${task.name}
+      </td> 
+      <td>
+      ${task.description}
+      </td> 
+      <td>
+      ${task.deadline}
+      </td> 
+      <td><button onclick='markTaskComplete(this)'>Complete</button></td> 
+      <td><button onclick='removeTask(this)'>Remove</button></td> 
+    </tr>`
     )
     .join("");
 }
 
 //Function to initialize the table
 function init() {
-  taskTable.innerHTML = ""; // Clear the table
+  taskTable.innerHTML =
+    "<tr><td>'Name'</td><td>'Description'</td><td>'Deadline'</td><td>'Completed/Incomplete'</td></tr>"; // Clear the table and set headings
   tasks = []; // Reset the tasks array
   render(); // Call the render function
 }
+
+// Event listener for form submission
+taskForm.addEventListener("submit", handleSubmission);
+
+// Call the init function to set up the initial state of the app
+init();
