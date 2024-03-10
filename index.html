@@ -11,6 +11,17 @@
       <h1>Task Tracker</h1>
       <form id="taskForm">
         <!-- Task form inputs go here -->
+        <label for="taskName">Task Name</label>
+        <input type="text" id="taskName" />
+        <label for="taskDescription">Description</label>
+        <textarea
+          name="taskDescription"
+          id="taskDescription"
+          cols="30"
+          rows="10"
+        ></textarea>
+        <label for="taskDeadline">Deadline</label>
+        <input type="date" id="taskDeadline" />
         <button type="submit">Add Task</button>
       </form>
       <table id="taskTable">
