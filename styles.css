@@ -25,13 +25,13 @@ label {
   margin-bottom: 1%;
 }
 input {
-  font-size: x-large;
+  font-size: larger;
   margin-bottom: 1%;
   height: fit-content;
   width: fit-content;
 }
 textarea {
-  font-size: larger;
+  font-size: x-large;
   margin-bottom: 1%;
   width: 50%;
 }
@@ -40,4 +40,7 @@ button {
   height: auto;
   width: fit-content;
   font-size: large;
+}
+#taskDeadline {
+  font-size: x-large;
 }
