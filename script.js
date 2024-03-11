@@ -40,10 +40,13 @@ function handleSubmission(event) {
 //Function to mark complete
 function markTaskComplete(task) {
   tasks[task.parentElement.parentElement.id].complete = "<td>Completed</td>";
-  task.parentElement.innerHTML = "Completed";
+  render();
 }
 //Function to remove task
-function removeTask(task) {}
+function removeTask(task) {
+  tasks.splice([task.parentElement.parentElement.id], 1);
+  render();
+}
 //Function to render tasks in the table
 function render() {
   // TODO: Use array methods to create a new table row of data for each item in the array.
