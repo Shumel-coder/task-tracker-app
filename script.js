@@ -9,6 +9,8 @@ let tasks = [];
 //Section 3: Cached Element References
 const taskForm = document.getElementById("taskForm");
 const taskTable = document.getElementById("taskTable");
+const tableHead = document.getElementById("tableHead");
+const tableBody = document.getElementById("tableBody");
 
 //Functions
 //Function to handle form submissions
@@ -29,17 +31,26 @@ function handleSubmission(event) {
     name: taskName,
     description: taskDescription,
     deadline: taskDeadline,
+    complete:
+      "<td><button onclick='markTaskComplete(this)'>Complete</button></td>",
   });
   render();
 }
 
+//Function to mark complete
+function markTaskComplete(task) {
+  tasks[task.parentElement.parentElement.id].complete = "<td>Completed</td>";
+  task.parentElement.innerHTML = "Completed";
+}
+//Function to remove task
+function removeTask(task) {}
 //Function to render tasks in the table
 function render() {
   // TODO: Use array methods to create a new table row of data for each item in the array.
-  taskTable.innerHTML = tasks
+  tableBody.innerHTML = tasks
     .map(
-      (task) =>
-        `<tr> 
+      (task, index) =>
+        `<tr id="${index}"> 
       <td>
       ${task.name}
       </td> 
@@ -49,7 +60,7 @@ function render() {
       <td>
       ${task.deadline}
       </td> 
-      <td><button onclick='markTaskComplete(this)'>Complete</button></td> 
+      ${task.complete} 
       <td><button onclick='removeTask(this)'>Remove</button></td> 
     </tr>`
     )
@@ -58,8 +69,9 @@ function render() {
 
 //Function to initialize the table
 function init() {
-  taskTable.innerHTML =
-    "<tr><td>'Name'</td><td>'Description'</td><td>'Deadline'</td><td>'Completed/Incomplete'</td></tr>"; // Clear the table and set headings
+  tableBody.innerHTML = ""; // Clear the table and set headings
+  tableHead.innerHTML =
+    "<tr><th>Name</th><th>Description</th><th>Deadline</th><th>Completed/Incomplete</th><th>Remove</th></tr>";
   tasks = []; // Reset the tasks array
   render(); // Call the render function
 }
